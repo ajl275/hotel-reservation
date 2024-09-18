@@ -17,6 +17,24 @@ public class ReservationService {
     private static final Map<Customer, List<Reservation>> customerReservations = new HashMap<>();
     private static final Map<IRoom, List<Reservation>> roomReservations = new HashMap<>();
 
+    //This is the static singleton instance, it was always here, but it is now at the top for visibility
+    // and changed to lazy instantiation like the examples on the linked site rather than the eager/early
+    // instantiation like shown in class
+    private static ReservationService instance = null;
+
+    /**
+     * gets the singleton instance of this service
+     * @return the reservation service instance
+     */
+    public static ReservationService getInstance() {
+        if(instance == null) {
+            instance = new ReservationService();
+        }
+        return instance;
+    }
+
+    private ReservationService(){}
+
     /**
      * adds a room to the hotel
      *
@@ -119,14 +137,6 @@ public class ReservationService {
         return rooms.values();
     }
 
-    private static final ReservationService instance = new ReservationService();
 
-    /**
-     * gets the singleton instance of this service
-     * @return the reservation service instance
-     */
-    public static ReservationService getInstance() {
-        return instance;
-    }
 
 }

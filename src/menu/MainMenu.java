@@ -66,6 +66,10 @@ public class MainMenu {
             try {
                 System.out.println("Enter CheckIn Date mm/dd/yyyy example 02/01/2020");
                 checkIn = format.parse(scanner.nextLine());
+                System.out.println(Calendar.getInstance().getTime());
+                if(checkIn.before(Calendar.getInstance().getTime())) {
+                    throw new IllegalArgumentException(); //make them enter a date after the check-in they specified!
+                }
                 check = true;
             } catch (Exception e) {
                 //System.out.println(e.toString());
@@ -101,6 +105,8 @@ public class MainMenu {
             Date newOut = addDays(checkOut,searchRange);
             System.out.println("No rooms found for desired range");
             System.out.println("Searching for rooms from: " + newIn + " to: " + newOut);
+            checkIn = newIn;
+            checkOut = newOut;
             available = hr.findARoom(newIn,newOut);
         }
 
@@ -169,9 +175,12 @@ public class MainMenu {
     {
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        c.add(Calendar.DATE, days); //negative decrements the days
+        c.add(Calendar.DATE, days);
         return c.getTime();
     }
+    //adapted from stackoverflow answer on how to increment days in java
+    //https://stackoverflow.com/questions/428918/how-can-i-increment-a-date-by-one-day-in-java/20906602
+
 
     private static void createAccount() {
         boolean notCreated = true;

@@ -15,7 +15,11 @@ import java.util.Date;
  * @author Amy Lanclos
  */
 public class HotelResource {
-    private static final HotelResource instance = new HotelResource();
+
+    //This is the static singleton instance, it was always here, but it is now
+    // changed to lazy instantiation like the examples on the linked site rather than the eager/early
+    // instantiation like shown in class
+    private static HotelResource instance = null;
 
     private static final CustomerService cs = CustomerService.getInstance();
     private static final ReservationService rs = ReservationService.getInstance();
@@ -26,12 +30,13 @@ public class HotelResource {
      * @return the HotelResource instance
      */
     public static HotelResource getInstance() {
+        if(instance == null) {
+            instance = new HotelResource();
+        }
         return instance;
     }
 
-    private HotelResource() {
-
-    }
+    private HotelResource() { }
 
     /**
      * retrieves customer via their email

@@ -14,7 +14,11 @@ import java.util.List;
  * @author Amy Lanclos
  */
 public class AdminResource {
-    private static final AdminResource instance = new AdminResource();
+
+    //This is the static singleton instance, it was always here, but it is now
+    // changed to lazy instantiation like the examples on the linked site rather than the eager/early
+    // instantiation like shown in class
+    private static AdminResource instance = null;
 
     private static final CustomerService cs = CustomerService.getInstance();
     private static final ReservationService rs = ReservationService.getInstance();
@@ -24,6 +28,9 @@ public class AdminResource {
      * @return the AdminResource instance
      */
     public static AdminResource getInstance() {
+        if(instance == null) {
+            instance = new AdminResource();
+        }
         return instance;
     }
 

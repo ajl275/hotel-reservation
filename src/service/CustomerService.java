@@ -11,17 +11,26 @@ import java.util.Map;
  * @author Amy Lanclos
  */
 public class CustomerService {
+
     private final Map<String, Customer> customers;
+
     private CustomerService() {
         customers = new HashMap<>();
     }
-    private static final CustomerService instance = new CustomerService();
+
+    //This is the static singleton instance, it was always here, but it is now
+    // changed to lazy instantiation like the examples on the linked site rather than the eager/early
+    // instantiation like shown in class
+    private static CustomerService instance = null;
 
     /**
      *
      * @return the instance
      */
     public static CustomerService getInstance() {
+        if(instance == null) {
+            instance = new CustomerService();
+        }
         return instance;
     }
 
