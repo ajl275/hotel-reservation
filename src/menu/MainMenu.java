@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * main menu and entry point of the hotel reservation application
+ * main menu the hotel reservation application
  *
  * @author Amy Lanclos
  */
@@ -28,7 +28,7 @@ public class MainMenu {
     private static String email = ""; //current email for a "logged-in" user, i.e. when booking a room the customer's account even if newly created
     private static final SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy"); //allows users to enter mm/dd/yyyy style dates
 
-    public static void main(String[] args) {
+    public static void run() {
         while(true) {
             displayMenu();
             try {
